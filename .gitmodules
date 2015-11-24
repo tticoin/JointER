@@ -1,0 +1,3 @@
+[submodule "ranis_data/ranis"]
+	path = ranis_data/ranis
+	url = https://github.com/mynlp/ranis.git
