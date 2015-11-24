@@ -1,5 +1,5 @@
 # JointER
-Implementation of Modeling Joint Entity and Relation Extraction with Table Representation in EMNLP2014
+Implementation of [Modeling Joint Entity and Relation Extraction with Table Representation](http://www.aclweb.org/anthology/D/D14/D14-1200.pdf) in EMNLP2014
 
 ## Prerequistites
 
