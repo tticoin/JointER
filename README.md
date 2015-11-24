@@ -8,12 +8,15 @@ Sun JDK 1.7 or more
 ~20GB RAM (depending on corpus size)
 
 This software depends on the following libraries:
-* guava
-* jbzip2
-* mapdb
-* mtj
-* patricia-trie
-* snamekyaml
+* [guava](https://code.google.com/p/guava-libraries/)
+* [jbzip2](https://code.google.com/p/jbzip2/)
+* [mapdb](http://www.mapdb.org)
+* [mtj](https://github.com/fommil/matrix-toolkits-java/)
+* [patricia-trie](https://github.com/rkapsi/patricia-trie)
+* [snamekyaml](https://bitbucket.org/asomov/snakeyaml)
+
+We put these libraries under the lib/ directory for convenience.
+
 
 ## Compilation
 
