@@ -118,7 +118,6 @@ public class Parameters {
 	private boolean useGoldEntitySpan;
 	private boolean useRelationTypeFilter;
 	
-	private boolean useSvmInit;
 	private boolean useLocalInit;
 	private boolean useWeighting;
 	private boolean useAveraging;
@@ -186,7 +185,6 @@ public class Parameters {
 		setUseSimpleFeatures(false);
 		setUseTermSurface(true);
 		setUseParallel(false);
-		setUseSvmInit(false);
 		setUseLocalInit(false);
 		setUseRelationTypeFilter(true);
 		setLocalIteration(5);
@@ -510,10 +508,6 @@ public class Parameters {
 		return useSimpleFeatures;
 	}
 	
-	public boolean getUseSvmInit() {
-		return useSvmInit;
-	}
-
 	public boolean getUseTermSurface() {
 		return useTermSurface;
 	}
@@ -827,9 +821,6 @@ public class Parameters {
 	}
 	public void setUseSimpleFeatures(boolean useSimpleFeatures) {
 		this.useSimpleFeatures = useSimpleFeatures;
-	}
-	public void setUseSvmInit(boolean useSvmInit) {
-		this.useSvmInit = useSvmInit;
 	}
 	public void setUseTermSurface(boolean useTermSurface) {
 		this.useTermSurface = useTermSurface;

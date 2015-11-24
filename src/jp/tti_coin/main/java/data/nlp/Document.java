@@ -91,7 +91,9 @@ public class Document extends Node {
 			}else{
 				Nodes nodes = new Nodes(params, nodeMap);
 				assert !children.containsKey(offset): offset.getStart()+":"+offset.getEnd()+":"+nodes.getNode().getId()+":"+children.get(offset).getNode().getId();
-				children.put(offset, nodes);
+        if(nodes.getNode() != null){
+          children.put(offset, nodes);
+        }
 			}
 		}
 		assert children.size() + sentences.size() == nodes.keySet().size();

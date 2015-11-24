@@ -11,7 +11,6 @@ learningMethod: 0 # 0: Perceptron, 1: SGDSVM, 2: AdaGrad, 3:AROW, 4:SCW, 5:DCDSS
 updateMethod: 0 # 0: MaxViolation, 1: Early, 2: Standard
 useAveraging: true
 useBestFirst: false
-useSvmInit: false # initialize weights with SVM
 useLocalInit: false # initialize with local features
 localIteration: 0
 useWeighting: false
@@ -28,10 +27,10 @@ globalWeight: 1.0
 margin: 1.0 # margin (used except for SCW)
 lambda: 1.0 # Lambda for SGDSVM (1.0e-4), AdaGrad (1.0e-4) and DCDSSVM (1.0), r for AROW (1.0), C for SCWModel (1.0)
 searchMethod: 8 # 0: LtoR, 1: RtoL, 2: Close(LtoR), 3: Easy, 4: Difficult, 5:Random, 6:LtoR(E), 7:RtoL(E), 8:Close(RtoL), 9:EasyEntity
-trainFolder: ranis_data/conv/dev/
-devFolder: ranis_data/conv/test/
-testFolder: ranis_data/conv/test/
-modelFile: ranis_data/model-joint
+trainFolder: ranis_data/conv/JA/dev/
+devFolder: ranis_data/conv/JA/test/
+testFolder: ranis_data/conv/JA/test/
+modelFile: ranis_data/model-ja-joint
 textExtension: .split.txt
 annotationExtension: .split.ann
 predAnnotationExtension: .split.pred.ann

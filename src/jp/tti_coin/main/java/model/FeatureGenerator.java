@@ -9,13 +9,9 @@ import java.util.TreeMap;
 import no.uib.cipr.matrix.VectorEntry;
 
 import config.Parameters;
-import data.Data;
 import data.Instance;
 import data.Label;
 import data.LabelUnit;
-import de.bwaldvogel.liblinear.Feature;
-import de.bwaldvogel.liblinear.FeatureNode;
-import de.bwaldvogel.liblinear.Problem;
 
 public abstract class FeatureGenerator {
 	protected Parameters params;
@@ -67,59 +63,6 @@ public abstract class FeatureGenerator {
 		params.setUseGlobalFeatures(useGlobalFeatures);
 	}
 	
-	public Problem buildProblem(Data data){
-		boolean useGlobalFeatures = params.getUseGlobalFeatures();
-		params.setUseGlobalFeatures(false);
-		Problem problem = new Problem();
-		int size = 0;
-		for(int i = 0;i < data.size();i++){
-			Instance instance = data.getInstance(i);
-			for(int j = 0;j < instance.size();j++){
-				size += instance.getCandidateLabels(instance.getGoldLabel(), j).size();
-			}
-		}	
-		problem.l = size;
-		problem.n = params.fvSize() + 1;
-		problem.y = new double[problem.l];
-		problem.x = new Feature[problem.l][];
-		problem.labels = new LabelUnit[problem.l];
-		problem.bias = -1;
-		int idx = 0;
-		for(int i = 0;i < data.size();i++){
-			Instance instance = data.getInstance(i);
-			for(int j = 0;j < instance.size();j++){
-				for(LabelUnit candidateLabel:instance.getCandidateLabels(instance.getGoldLabel(), j)){
-					SparseFeatureVector localFv = calculateFeature(instance, instance.getGoldLabel(), j, candidateLabel);
-					localFv.compact();
-					if(candidateLabel.equals(instance.getGoldLabel().getLabel(j))){
-						problem.y[idx] = 1;
-					}else{
-						problem.y[idx] = -1;
-					}
-					problem.labels[idx] = candidateLabel;
-					Map<Integer, Double> fvMap = new TreeMap<Integer, Double>();
-					for(VectorEntry entry:localFv.getFeatureVectors().get(0).getSv()){
-						assert !fvMap.containsKey(entry.index());
-						fvMap.put(entry.index(), entry.get());
-					}
-					problem.x[idx] = new Feature[fvMap.size()];
-					int fvIdx = 0;
-					int lastIndex = -1;
-					for(Entry<Integer, Double> fvEntry:fvMap.entrySet()){
-						assert fvEntry.getKey() >= 0 && fvEntry.getKey() < params.fvSize(): fvEntry.getKey();
-						assert lastIndex < fvEntry.getKey(): lastIndex +":"+fvEntry.getKey();
-						//NOTE: index > 0
-						problem.x[idx][fvIdx] = new FeatureNode(fvEntry.getKey()+1, fvEntry.getValue().floatValue());						
-						fvIdx++;
-						lastIndex = fvEntry.getKey();
-					}
-					idx++;
-				}
-			}
-		}
-		params.setUseGlobalFeatures(useGlobalFeatures);
-		return problem;
-	}
 	public abstract void init();
 	
 }

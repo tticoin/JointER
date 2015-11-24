@@ -1,0 +1,50 @@
+!!config.Parameters
+fvBitSize: 20
+verbosity: 3
+beamSize: 2
+iteration: 9
+outputInterval: 1
+miniBatch: 1
+useByte: true
+useSelfRelation: false
+learningMethod: 0 # 0: Perceptron, 1: SGDSVM, 2: AdaGrad, 3:AROW, 4:SCW, 5:DCDSSVM
+updateMethod: 0 # 0: MaxViolation, 1: Early, 2: Standard
+useAveraging: false
+useBestFirst: false
+useLocalInit: false # initialize with local features
+localIteration: 0
+useWeighting: false
+useGlobalFeatures: true
+useGlobalRelationFeatures: true
+useDynamicSort: false
+useWeightedMargin: false
+useFullFeatures: true
+useTermSurface: true
+useParallel: false
+processors: 1
+useGoldEntitySpan: false
+relWeight: 1.0
+globalWeight: 1.0
+margin: 1.0 # margin (used except for SCW)
+lambda: 1.0 # Lambda for SGDSVM (1.0e-4), AdaGrad (1.0e-4) and DCDSSVM (1.0), r for AROW (1.0), C for SCWModel (1.0)
+searchMethod: 2 # 0: LtoR, 1: RtoL, 2: Close(LtoR), 3: Easy, 4: Difficult, 5:Random, 6:LtoR(E), 7:RtoL(E), 8:Close(RtoL), 9:EasyEntity
+trainFolder: ranis_data/conv/EN/dev/
+devFolder: ranis_data/conv/EN/test/
+testFolder: ranis_data/conv/EN/test/
+modelFile: ranis_data/model-en-joint
+textExtension: .txt
+annotationExtension: .ann
+predAnnotationExtension: .pred.ann
+parseParameters:
+  ENJU:
+    sentenceTag: sentence
+    extension: .enju.so
+    headAttributeType: sem_head
+    baseAttributeType: base
+    idAttributeType: id
+    posAttributeType: pos
+    predicateAttributeType: pred
+    wordTag: tok
+    tokenFeatureAttributeTypes: [cat,pos,lexentry,type]
+    ignoredAttributeTypes: [head]
+sentenceAnnotation: ENJU

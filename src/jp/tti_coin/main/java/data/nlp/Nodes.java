@@ -38,7 +38,8 @@ public class Nodes implements Comparable<Nodes> {
 	}
 
 	public Offset getOffset() {
-		return getNode().getOffset();
+    if(getNode() == null)return null;
+    return getNode().getOffset();
 	}
 	
 	@Override

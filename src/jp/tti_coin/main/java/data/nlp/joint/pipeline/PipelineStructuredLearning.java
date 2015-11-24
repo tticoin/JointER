@@ -169,7 +169,6 @@ public class PipelineStructuredLearning extends StructuredLearning {
 		
 		int size = data.size();
 
-		assert !params.getUseSvmInit();
 		assert !params.getUseLocalInit();
 		// learning (NER)
 		start = System.currentTimeMillis();

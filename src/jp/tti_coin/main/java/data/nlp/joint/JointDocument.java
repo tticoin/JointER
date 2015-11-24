@@ -55,7 +55,8 @@ public class JointDocument extends Document {
 					if(arg1.getKey().equals(arg2.getKey()))continue;
 					assert goldEntities.containsKey(arg2.getValue()): id+":"+arg2.getValue();
 					Node arg2Node = goldEntities.get(arg2.getValue());
-					if(arg1Node.getNodes().getSentence() != arg2Node.getNodes().getSentence())continue;
+					if(arg1Node == null || arg2Node == null)continue;
+          if(arg1Node.getNodes().getSentence() != arg2Node.getNodes().getSentence())continue;
 					if(arg1Node.getOffset().compareTo(arg2Node.getOffset()) > 0)continue;
 					if(arg1Node.getOffset().compareTo(arg2Node.getOffset()) == 0){
 						if(arg1Node.getId().compareTo(arg2Node.getId()) < 0){

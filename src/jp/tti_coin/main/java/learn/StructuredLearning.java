@@ -29,10 +29,6 @@ import model.Model;
 
 import data.Data;
 import data.Instance;
-import de.bwaldvogel.liblinear.Linear;
-import de.bwaldvogel.liblinear.Parameter;
-import de.bwaldvogel.liblinear.Problem;
-import de.bwaldvogel.liblinear.SolverType;
 import eval.Evaluator;
 
 public class StructuredLearning {
@@ -179,27 +175,7 @@ public class StructuredLearning {
 
 		Model model = createModel(fg);
 		Random rand = new MersenneTwister(0);
-		
-		if(params.getUseSvmInit()){
-			long svmStart = System.currentTimeMillis();
-			Problem prob = fg.buildProblem(data);
-			if(params.getVerbosity() > 2){
-				System.out.format("Problem calculation finished in %d [msec] \n", System.currentTimeMillis() - svmStart);
-				svmStart = System.currentTimeMillis();
-			}
-	        Parameter param = new Parameter(SolverType.L2R_L2LOSS_SVC_DUAL, 1, 0.01, 0.1);
-            de.bwaldvogel.liblinear.Model svmModel = Linear.train(params, data, prob, param);
-			if(params.getVerbosity() > 2){
-				System.out.format("Learning in %d [msec] \n", System.currentTimeMillis() - svmStart);
-			}
-			model.initialize(svmModel.getLabels()[0] > 0 ? 1. : -1., svmModel.getFeatureWeights());
-			model.averageWeight();
-			// validation
-			if(evaluator != null && dev != null){
-				evaluator.evaluate(model, dev);
-			}
-		}
-		
+
 		int size = data.size();
 		Model localModel = null;
 		if(params.getUseLocalInit()){
