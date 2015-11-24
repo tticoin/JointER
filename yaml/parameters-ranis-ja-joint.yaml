@@ -1,0 +1,48 @@
+!!config.Parameters
+fvBitSize: 20
+verbosity: 3
+beamSize: 8
+iteration: 10
+outputInterval: 1
+miniBatch: 1
+useByte: false
+useSelfRelation: false
+learningMethod: 0 # 0: Perceptron, 1: SGDSVM, 2: AdaGrad, 3:AROW, 4:SCW, 5:DCDSSVM
+updateMethod: 0 # 0: MaxViolation, 1: Early, 2: Standard
+useAveraging: true
+useBestFirst: false
+useSvmInit: false # initialize weights with SVM
+useLocalInit: false # initialize with local features
+localIteration: 0
+useWeighting: false
+useGlobalFeatures: true
+useGlobalRelationFeatures: true
+useDynamicSort: false
+useWeightedMargin: false
+useFullFeatures: false
+useTermSurface: true
+useParallel: false
+processors: 1
+relWeight: 1.0
+globalWeight: 1.0
+margin: 1.0 # margin (used except for SCW)
+lambda: 1.0 # Lambda for SGDSVM (1.0e-4), AdaGrad (1.0e-4) and DCDSSVM (1.0), r for AROW (1.0), C for SCWModel (1.0)
+searchMethod: 8 # 0: LtoR, 1: RtoL, 2: Close(LtoR), 3: Easy, 4: Difficult, 5:Random, 6:LtoR(E), 7:RtoL(E), 8:Close(RtoL), 9:EasyEntity
+trainFolder: ranis_data/conv/dev/
+devFolder: ranis_data/conv/test/
+testFolder: ranis_data/conv/test/
+modelFile: ranis_data/model-joint
+textExtension: .split.txt
+annotationExtension: .split.ann
+predAnnotationExtension: .split.pred.ann
+parseParameters:
+  CABOCHA: 
+    sentenceTag: sentence
+    extension: .split.cabocha.so
+    headAttributeType: head
+    baseAttributeType: base
+    idAttributeType: id
+    posAttributeType: pos
+    wordTag: tok
+    tokenFeatureAttributeTypes: [cat,NE]
+sentenceAnnotation: CABOCHA

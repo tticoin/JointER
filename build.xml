@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="StructuredLearning">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <path id="StructuredLearning.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/guava-15.0.jar"/>
+        <pathelement location="lib/patricia-trie-0.6.jar"/>
+        <pathelement location="lib/jbzip2-0.9.1.jar"/>
+        <pathelement location="lib/mapdb-0.9.6.jar"/>
+        <pathelement location="lib/snakeyaml-1.11.jar"/>
+        <pathelement location="lib/mtj-1.0-snapshot.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src/jp/tti_coin/main/java">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+        <delete file="jointER.jar"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src/jp/tti_coin/main/java"/>
+            <classpath refid="StructuredLearning.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="NICTNounSynonymsDB" depends="build">
+        <java classname="utils.NICTNounSynonymsDB" failonerror="true" fork="yes">
+          <jvmarg line="-ea"/>
+          <classpath refid="StructuredLearning.classpath"/>
+        </java>
+    </target>
+    <target name="JointTrain" depends="build">
+        <java classname="data.nlp.joint.JointTrain" failonerror="true" fork="yes">
+          <jvmarg line="-ea"/>
+          <arg line="data/parameters-ipsj-joint.yaml"/>
+          <classpath refid="StructuredLearning.classpath"/>
+        </java>
+    </target>
+    <target name="jar" depends="build">
+        <jar jarfile="jointER.jar" filesetmanifest="mergewithoutmain">
+          <manifest>
+            <attribute name="Main-Class" value="data.nlp.joint.JointTrain"/>
+            <attribute name="Class-Path" value="."/>
+          </manifest>
+          <fileset dir="bin"/>
+          <zipfileset excludes="META-INF/*.SF" src="lib/guava-15.0.jar"/>
+          <zipfileset excludes="META-INF/*.SF" src="lib/patricia-trie-0.6.jar"/>
+          <zipfileset excludes="META-INF/*.SF" src="lib/jbzip2-0.9.1.jar"/>
+          <zipfileset excludes="META-INF/*.SF" src="lib/mapdb-0.9.6.jar"/>
+          <zipfileset excludes="META-INF/*.SF" src="lib/snakeyaml-1.11.jar"/>
+          <zipfileset excludes="META-INF/*.SF" src="lib/mtj-1.0-snapshot.jar"/>
+        </jar>
+    </target>
+</project>
