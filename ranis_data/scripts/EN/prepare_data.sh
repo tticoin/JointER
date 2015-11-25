@@ -12,7 +12,7 @@ mkdir -p ${OUTPUT}
 cp ${ORIGINALDATA}/**/*.txt ${OUTPUT}
 cp ${ORIGINALDATA}/**/*.ann ${OUTPUT}
 # remove disjoint entity
-sed -i -e 's/([0-9]+ )([0-9]+;[0-9]+ )+([0-9]+)/\1\3/g' -e "/^[^TR].*/d" ${OUTPUT}/*.ann
+sed -r -i -e 's/([0-9]+ )([0-9]+;[0-9]+ )+([0-9]+)/\1\3/g' -e "/^[^TR].*/d" ${OUTPUT}/*.ann
 # parse with enju
 for i in ${OUTPUT}/*.txt
 do
