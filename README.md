@@ -3,15 +3,20 @@ Implementation of [Modeling Joint Entity and Relation Extraction with Table Repr
 
 ## Prerequistites
 
-* Sun JDK 1.7 or more
-* ~20GB RAM (depends on corpus size)
-* This software depends on the following libraries:
-    * guava
-    * jbzip2
-    * mapdb
-    * mtj
-    * patricia-trie
-    * snamekyaml
+Sun JDK 1.7 or more
+
+~20GB RAM (depending on corpus size)
+
+This software depends on the following libraries:
+* [guava](https://code.google.com/p/guava-libraries/)
+* [jbzip2](https://code.google.com/p/jbzip2/)
+* [mapdb](http://www.mapdb.org)
+* [mtj](https://github.com/fommil/matrix-toolkits-java/)
+* [patricia-trie](https://github.com/rkapsi/patricia-trie)
+* [snamekyaml](https://bitbucket.org/asomov/snakeyaml)
+
+We put these libraries under the lib/ directory for convenience.
+
 
 ## Compilation
 
@@ -21,11 +26,11 @@ Implementation of [Modeling Joint Entity and Relation Extraction with Table Repr
 
 ### Data preparation 
 
-* Prerequisites
-    * mecab (with [neologd](https://github.com/neologd/mecab-ipadic-neologd))
-    * cabocha 
+Prerequisites
+* mecab (with [neologd](https://github.com/neologd/mecab-ipadic-neologd))
+* cabocha 
 
-* Data preparation
+Data preparation
 
 ```sh
 git submodule init
@@ -38,14 +43,16 @@ popd
 
 ### How to run 
 
-* Relation Extraction
+Relation Extraction
 
 1. Train
 `java -cp jointER.jar data.nlp.relation.RelationTrain yaml/parameters-ranis-ja-rel.yaml`
 2. Test
 `java -cp jointER.jar data.nlp.relation.RelationPredict yaml/parameters-ranis-ja-rel.yaml`
 
-* Joint Entity and Relation Extraction
+Results will be produced as ranis_data/conv/test/*.pred.ann 
+
+Joint Entity and Relation Extraction
 
 1. Train
 `java -cp jointER.jar data.nlp.joint.JointTrain yaml/parameters-ranis-ja-joint.yaml`
@@ -58,10 +65,10 @@ Please uncompress and use model files in ranis_data/pretrained if you want to us
 
 ### Data preparation 
 
-* Prerequisites
-    * enju
-    
-* Data preparation
+Prerequisites
+* enju
+
+Data preparation
 
 ```sh
 git submodule init # required if ranis is not updated
@@ -76,7 +83,7 @@ Note: This package does not handle nested/disjoint entities and intersentential 
 
 ### How to run 
 
-* Joint Entity and Relation Extraction
+Joint Entity and Relation Extraction
 
 1. Train
 `java -cp jointER.jar data.nlp.joint.JointTrain yaml/parameters-ranis-en-joint.yaml`
@@ -85,7 +92,7 @@ Note: This package does not handle nested/disjoint entities and intersentential 
 
 ## Configuration for new data
 
-Please modify the yaml file.
+Please modify the yaml file. 
 
 ## Notes
 
